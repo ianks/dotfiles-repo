@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+source "$HOME/.dev-machine/utils.bash"
+
+system_type=$(uname -s)
+
+if [ "$system_type" != "Darwin" ]; then
+  echo "⏭ System is not a mac, skipping"
+  exit 1
+fi
+
+fancy_echo "ℹ️ Setting up your Mac..."
+
+if ! command -v brew >/dev/null; then
+  fancy_echo "Installing Homebrew ..."
+    curl -fsS \
+      'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+
+    append_to_zshrc '# recommended by brew doctor'
+
+    # shellcheck disable=SC2016
+    append_to_zshrc "export PATH=\"$(brew --prefix)/bin:$PATH\"" 1
+    append_to_bash_profile "export PATH=\"$(brew --prefix)/bin:$PATH\"" 1
+
+    export PATH="$(brew --prefix)/bin:$PATH"
+fi
+
+fancy_echo "Updating Homebrew formulae ..."
+brew update --force # https://github.com/Homebrew/brew/issues/1151
+brew bundle --file=- <<EOF
+tap "universal-ctags/universal-ctags"
+
+# Unix
+brew "universal-ctags", args: ["HEAD"]
+brew "git"
+brew "git-lfs"
+brew "ripgrep"
+brew "zsh"
+brew 'fastmod'
+brew "gh"
+brew "fd"
+brew "rust-analyzer"
+
+# Apps
+cask 'iterm2', args: { force: true }
+cask "google-cloud-sdk", args: { force: true }
+cask 'postman', args: { force: true }
+cask 'ngrok', args: { force: true }
+cask 'tuple', args: { force: true }
+EOF
+
+fancy_echo "💻 Installing vscode settings..."
+ln -sf ~/.config/Code/User/settings.json  ~/Library/Application\ Support/Code/User/settings.json
+ln -sf ~/.config/Code/User/keybindings.json  ~/Library/Application\ Support/Code/User/keybindings.json
+
+fancy_echo "⌨️ Setting up iterm2 prefs..."
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.config/iterm2"
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+fancy_echo "Installing stackline..."
+mkdir -p ~/.hammerspoon
+git clone https://github.com/AdamWagner/stackline.git ~/.hammerspoon/stackline
+

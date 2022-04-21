@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+for script in $(find $HOME/.dev-machine/setups -type f | sort); do
+  echo "🏃‍♀️ Running setup script for $script"
+
+  if bash "$script"; then 
+    echo "👍 Successfully ran $script"
+  else
+    echo "⚠️ Error occurred when attempting to run $script"
+  fi
+done
+
+echo "✅ Done! Please open a new terminal window for changes to take effect."

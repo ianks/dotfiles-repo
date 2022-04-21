@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+source "$HOME/.dev-machine/utils.bash"
+
+install_plugins() {
+  echo "🔌 Installing nvim plugins"
+  # quietly_run nvim --headless +PlugInstall +qall
+}
+
+install_plugins

@@ -1,0 +1,25 @@
+# vi: set ft=zsh:
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Load bundles from oh-my-zsh
+antigen bundle git
+antigen bundle ruby
+antigen bundle history-substring-search
+antigen bundle command-not-found
+antigen bundle node
+antigen bundle yarn
+
+# Load bundles from external repos
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle jeffreytse/zsh-vi-mode
+
+# Theme
+antigen theme romkatv/powerlevel10k
+
+# Tell Antigen that you're done.
+antigen apply

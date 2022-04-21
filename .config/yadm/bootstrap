@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+chmod +x "$HOME/.dev-machine/install" && exec "$HOME/.dev-machine/install"

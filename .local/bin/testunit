@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'test/unit'
+
+
+base_dir = Dir.pwd
+
+loop do
+  break if Dir["#{base_dir}/*"].any? { |d| d.end_with?("/test") }
+
+  parts = base_dir.split("/")
+  parts.pop
+  raise 'could not find test dir' if parts.empty?
+  base_dir = File.join(*parts)
+end
+
+exit Test::Unit::AutoRunner.run(true, base_dir)

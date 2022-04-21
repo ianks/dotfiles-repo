@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+source "$HOME/.dev-machine/utils.bash"
+
+if [ -f "$HOME/.dev-machine.local" ]; then
+  fancy_echo "Running your customizations from ~/.dev-machine.local ..."
+  # shellcheck disable=SC1090
+  . "$HOME/.dev-machine.local"
+fi

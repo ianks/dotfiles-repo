@@ -1,0 +1,62 @@
+# vi: ft=zsh
+alias cls='clear;ls'
+
+# Show human friendly numbers and colors
+alias df='df -h'
+alias du='du -h -d 2'
+
+
+# Alias managament
+alias alias-edit='$EDITOR ~/.aliases'
+alias alias-reload='source ~/.aliases'
+alias alias-list='alias | sort'
+
+# Vim life
+alias v='nvim'
+alias vim='nvim'
+alias :q='exit'
+
+# Git Aliases
+alias gpsh='git push -u origin `git rev-parse --abbrev-ref HEAD`'
+alias grb='git recent-branches'
+alias groot='cd $(git root)'
+alias gri='git rebase --interactive'
+
+# Common shell functions
+alias less='less -r'
+alias tf='tail -f'
+alias l='less'
+alias lh='ls -alt | head' # see the last modified files
+alias screen='TERM=screen screen'
+alias cl='clear'
+alias gz='tar -zcvf'
+alias ka9='killall -9'
+alias k9='kill -9'
+alias ..='cd ..'
+
+# Wisdom is good
+alias wisdom='fortune -s | cowsay'
+
+# Generate a secure token
+alias genpw='openssl rand -base64 25'
+
+# Time in iso8601
+alias now='date -u +"%Y-%m-%dT%H:%M:%SZ"'
+
+# Ruby
+alias be='bundle exec'
+alias rs='bundle exec rspec'
+alias rsc='bundle exec rspec $(git status -s spec/ | cut -c4-)'
+alias depry="rg -l 'binding.pry' | xargs sed --in-place '/binding.pry/d'"
+
+# Docker
+alias dc='docker-compose'
+
+# Misc
+alias dbreset='git restore db/structure.sql; rake db:drop; dev up'
+alias shipit='gh pr comment --body "/🚢it"'
+
+vrg() {
+  nvim $(rg -l "$@")
+}
+

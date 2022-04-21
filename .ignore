@@ -1,0 +1,8 @@
+log
+tmp
+vendor
+public/generated
+node_modules
+bower_components
+*.min*
+tags
