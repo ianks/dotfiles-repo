@@ -34,6 +34,7 @@
     dir                     # current directory
     vcs                     # git status
     # prompt_char           # prompt symbol
+    arch
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -104,6 +105,9 @@
     # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
   )
+
+  # Hide default arch
+  typeset -g POWERLEVEL9K_ARCH_DEFAULT=arm64
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
   typeset -g POWERLEVEL9K_MODE=powerline

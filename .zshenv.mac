@@ -1,0 +1,25 @@
+export HOMEBREW_PREFIX_x86_64="$HOME/arch/x86_64/homebrew"
+export HOMEBREW_PREFIX_arm64="/opt/homebrew"
+
+if [[ "$(arch)" == "arm64" ]]; then
+  export ARCH_SYSROOT="/"
+  export HOMEBREW_PREFIX="$HOMEBREW_PREFIX_arm64"
+  export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig:$HOMEBREW_PREFIX/lib/pkgconfig"
+  export RUSTUP_TOOLCHAIN="stable-aarch64-apple-darwin"
+  export PATH="$HOMEBREW_PREFIX/bin:$(echo $PATH | sed -e "s,$HOMEBREW_PREFIX_x86_64,$HOMEBREW_PREFIX_arm64,g")"
+else
+  export ARCH_SYSROOT="$HOME/arch/x86_64"
+  export ASDF_DIR="$ARCH_SYSROOT/.asdf"
+  export ASDF_DATA_DIR="$ASDF_DIR"
+  export PROMPT="🖥  x86_64 | $PROMPT"
+  export HOMEBREW_PREFIX="$HOMEBREW_PREFIX_x86_64"
+  export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/openssl@3/lib/pkgconfig:$HOMEBREW_PREFIX/lib/pkgconfig"
+  export RUSTUP_TOOLCHAIN="stable-x86_64-apple-darwin"
+  export PATH="$HOMEBREW_PREFIX/bin:$(echo $PATH | sed -e "s,$HOMEBREW_PREFIX_arm64,$HOMEBREW_PREFIX_x86_64,g")"
+  unset LDFLAGS
+fi
+
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+
+alias intel="arch -x86_64 /bin/zsh"
+alias arm64="arch -arm64 /bin/zsh"
