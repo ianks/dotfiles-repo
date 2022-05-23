@@ -92,5 +92,7 @@
   "editor.formatOnSave": true,
   "terminal.integrated.env.osx": {
     "VISUAL": "code -w"
-  }
+  },
+  "editor.inlayHints.enabled": false,
+  "window.zoomLevel": 1
 }

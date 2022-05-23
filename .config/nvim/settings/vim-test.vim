@@ -1,5 +1,6 @@
 let g:test#strategy = 'neovim'
 let g:test#ruby#rails#options = '--verbose --color'
+let g:test#rust#cargotest#options = '-- --nocapture'
 let g:test#javascript#jest#file_pattern =  '\v(.*)test\.(js|mjs|ts|jsx|tsx)$'
 let g:test#javascript#jest#executable = 'yarn test --no-watch --no-coverage'
 let g:test#javascript#runner = 'jest'

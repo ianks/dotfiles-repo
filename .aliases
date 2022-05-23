@@ -45,6 +45,7 @@ alias now='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 
 # Ruby
 alias be='bundle exec'
+alias bx='bundle exec'
 alias rs='bundle exec rspec'
 alias rsc='bundle exec rspec $(git status -s spec/ | cut -c4-)'
 alias depry="rg -l 'binding.pry' | xargs sed --in-place '/binding.pry/d'"

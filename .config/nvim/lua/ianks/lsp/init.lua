@@ -93,3 +93,12 @@ require("null-ls").setup {
   flags = lsp_flags,
   diagnostics_format = "[#{c}] #{m} (#{s})",
 }
+
+require("lspconfig").rust_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = function(client)
+    client.resolved_capabilities.document_formatting = false
+    default_on_attach(client)
+  end,
+  flags = lsp_flags,
+}
