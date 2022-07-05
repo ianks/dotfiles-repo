@@ -4,7 +4,11 @@ source ~/.config/antigen/antigen.zsh && antigen init ~/.antigenrc
 # Load aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+if [[ -f /opt/dev/sh/chruby/chruby.sh ]]; then
+  type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+else 
+  source $(brew --prefix chruby)/share/chruby/chruby.sh
+fi
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 
