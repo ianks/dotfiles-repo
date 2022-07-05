@@ -43,6 +43,7 @@ brew "zsh"
 brew 'fastmod'
 brew "gh"
 brew "fd"
+brew "exa"
 brew "neovim"
 
 # Apps
