@@ -1,6 +1,6 @@
 {
   "workbench.colorTheme": "One Dark Pro Darker",
-  "editor.fontFamily": "'Source Code Pro Light','Fira Code Light',Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "'FiraCode Nerd Font Mono Light','JetBrainsMono Nerd Font Regular',Menlo, Monaco,'Courier New',monospace",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "vim.easymotion": true,
@@ -11,6 +11,7 @@
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.includeLanguages": { "html.erb": "html", "erb": "html" },
   "rust-client.rustupPath": "~/.cargo/bin/rustup",
+  "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'FiraCode Nerd Font Mono Light','JetBrainsMono Nerd Font Regular',Menlo, Monaco, 'Courier New', monospace",
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "k"],
