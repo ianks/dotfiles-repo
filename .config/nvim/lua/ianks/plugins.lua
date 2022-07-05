@@ -10,6 +10,7 @@ local _ = vim.cmd [[
 require("packer").init { max_jobs = 50 }
 
 return require("packer").startup(function()
+  use "wbthomason/packer.nvim"
   use "navarasu/onedark.nvim"
   use "nvim-lualine/lualine.nvim"
   -- use "kassio/neoterm"

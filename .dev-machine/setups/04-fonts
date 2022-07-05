@@ -3,11 +3,12 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+source "$HOME/.dev-machine/utils.bash"
+
 system_type=$(uname -s)
 
 if [ "$system_type" == "Darwin" ]; then
-  brew tap homebrew/cask-fonts
-  brew install font-fira-code-nerd-font
-  brew install font-jetbrains-mono-nerd-font
-  brew install font-meslo-lg-nerd-font
+  echo "🖊 Installing fonts..."
+  quietly_run brew tap homebrew/cask-fonts
+  quietly_run brew install font-fira-code-nerd-font font-jetbrains-mono-nerd-font font-meslo-lg-nerd-font
 fi

@@ -6,7 +6,7 @@ IFS=$'\n\t'
 source "$HOME/.dev-machine/utils.bash"
 
 if ! command -v apt-get > /dev/null; then
-  echo "⏭ apt package manager not found, skipping..."
+  fancy_echo "⏭ apt package manager not found, skipping..."
   exit 0
 fi
 

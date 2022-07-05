@@ -37,19 +37,16 @@ tap "universal-ctags/universal-ctags"
 brew "universal-ctags", args: ["HEAD"]
 brew "git"
 brew "git-lfs"
+brew "pinentry-mac"
 brew "ripgrep"
 brew "zsh"
 brew 'fastmod'
 brew "gh"
 brew "fd"
-brew "rust-analyzer"
+brew "neovim"
 
 # Apps
 cask 'iterm2', args: { force: true }
-cask "google-cloud-sdk", args: { force: true }
-cask 'postman', args: { force: true }
-cask 'ngrok', args: { force: true }
-cask 'tuple', args: { force: true }
 EOF
 
 fancy_echo "💻 Installing vscode settings..."
@@ -59,6 +56,12 @@ ln -sf ~/.config/Code/User/keybindings.json  ~/Library/Application\ Support/Code
 fancy_echo "⌨️ Setting up iterm2 prefs..."
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.config/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+
+if ! grep -q pinentry-program "$HOME/.gnupg/gpg-agent.conf"; then
+  fancy_echo "⌨️ Setting up pinentry-program..."
+  echo "pinentry-program $(brew --prefix pinentry-mac)/bin/pinentry-mac" >> $HOME/.gnupg/gpg-agent.conf
+fi
 
 fancy_echo "Installing stackline..."
 mkdir -p ~/.hammerspoon

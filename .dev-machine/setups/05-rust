@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+source "$HOME/.dev-machine/utils.bash"
+
+install_rust() {
+  fancy_echo "🤘 Installing Rust..."
+  curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+}
+
+if ! command -v rustup > /dev/null; then
+  install_rust
+fi
+
+fancy_echo "🆕 Updating Rust..."
+quietly_run rustup install stable

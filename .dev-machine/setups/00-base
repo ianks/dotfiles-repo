@@ -5,19 +5,10 @@ IFS=$'\n\t'
 
 source "$HOME/.dev-machine/utils.bash"
 
-install_rust() {
-  fancy_echo "🤘 Installing Rust..."
-  curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
-}
-
 install_antigen() {
   fancy_echo "Ｚ Installing antigen (for zsh management)..."
   mkdir -p ~/.config/antigen && curl -L git.io/antigen > ~/.config/antigen/antigen.zsh
 }
-
-if ! command -v cargo > /dev/null; then
-  install_rust
-fi
 
 if [ ! -f "$HOME/.config/antigen/antigen.zsh" ]; then
   install_antigen
