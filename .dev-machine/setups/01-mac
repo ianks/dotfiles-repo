@@ -61,6 +61,7 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 if ! grep -q pinentry-program "$HOME/.gnupg/gpg-agent.conf"; then
   fancy_echo "⌨️ Setting up pinentry-program..."
   echo "pinentry-program $(brew --prefix pinentry-mac)/bin/pinentry-mac" >> $HOME/.gnupg/gpg-agent.conf
+  killall gpg-agent
 fi
 
 fancy_echo "Installing stackline..."
