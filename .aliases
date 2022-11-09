@@ -61,3 +61,30 @@ vrg() {
   nvim $(rg -l "$@")
 }
 
+gsquash() {
+  default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+  git merge origin $default_branch
+  git reset --soft $default_branch && git commit --edit "$@"
+}
+
+minitest-changes() {
+  main_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+  git fetch origin $main_branch 2>/dev/null
+  changed_tests="$(git diff origin/$main_branch --name-only 'test/**/*_test.rb')"
+  count="$(echo "$changed_tests" | wc -l | xargs)"
+
+  echo "🧪 Running tests for $count changed files"
+
+  echo "$changed_tests" | ruby \
+    -I"lib:test" \
+    -rbundler/setup \
+    -rtest_helper \
+    -e 'STDIN.readlines.each { |f| require_relative(f.strip) }' \
+    -- $@
+}
+
+alias mtc="minitest-changes"
+
+gch() {
+ git checkout "$(git recent-branches | fzf | tr -d '[:space:]')"
+}
