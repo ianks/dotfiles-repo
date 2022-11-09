@@ -1,6 +1,6 @@
 local nls = require "null-ls"
 local client_capabilities = vim.lsp.protocol.make_client_capabilities()
-local capabilities = require("cmp_nvim_lsp").update_capabilities(client_capabilities)
+local capabilities = require("cmp_nvim_lsp").default_capabilities(client_capabilities)
 local lspflags = { debounce_text_changes = 150 }
 local nmap = require("ianks.keymap").nmap
 local telescope = require "telescope.builtin"
@@ -18,14 +18,24 @@ local default_on_attach = function(client)
   nmap { "<leader>cr", vim.lsp.buf.rename, opts }
 end
 
-require("lspconfig").rust_analyzer.setup {
+require("rust-tools").setup({
   capabilities = capabilities,
-  on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    default_on_attach(client)
-  end,
+  on_attach = default_on_attach,
   flags = lsp_flags,
-}
+	server = {
+		settings = {
+			["rust-analyzer"] = {
+				checkOnSave = {
+					enable = true,
+					command = "check",
+					extraArgs = {
+						{ "--target-dir", "/tmp/rust-analyzer-check" },
+					},
+				},
+			},
+		},
+	},
+})
 
 require("lspconfig").sorbet.setup {
   cmd = { "bundle", "exec", "srb", "tc", "--lsp" },
@@ -94,11 +104,3 @@ require("null-ls").setup {
   diagnostics_format = "[#{c}] #{m} (#{s})",
 }
 
-require("lspconfig").rust_analyzer.setup {
-  capabilities = capabilities,
-  on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    default_on_attach(client)
-  end,
-  flags = lsp_flags,
-}

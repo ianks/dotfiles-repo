@@ -38,7 +38,8 @@ return require("packer").startup(function()
   use "rafamadriz/friendly-snippets"
   use "weilbith/nvim-code-action-menu"
   use "kosayoda/nvim-lightbulb"
-  use { "rust-lang/rust.vim", ft = { "rust" } }
+  use "simrat39/rust-tools.nvim"
+  use 'mfussenegger/nvim-dap'
   use "pangloss/vim-javascript"
   use "mxw/vim-jsx"
   use "jparise/vim-graphql"
