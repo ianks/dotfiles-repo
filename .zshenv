@@ -27,11 +27,6 @@ export RUBY_CONFIGURE_OPTS="--disable-install-doc --enable-shared --disable--ins
 # Use jk as escape in vi mode
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
-# Setup rust if cargo is installed
-[[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
-
 # Self update dev-machine
 [[ -f "$HOME/.dev-machine/self-update" ]] && ~/.dev-machine/self-update
 
@@ -42,3 +37,16 @@ bindkey "^[[B" history-substring-search-down
 # Scroll through recent commands with j and k in vim mode
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+# Add things to path
+export PATH="$PATH:/opt/homebrew/opt/mysql/bin"
+
+# Export spin secrets which start with EXPORT__
+if [ -d /etc/spin/secrets ]; then
+  for file in /etc/spin/secrets/EXPORT__*; do
+    local filename=$(basename $file)
+    local with_prefix_removed=${filename#EXPORT__}
+
+    export $with_prefix_removed="$(cat $file)"
+  done
+fi

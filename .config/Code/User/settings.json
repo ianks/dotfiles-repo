@@ -1,7 +1,8 @@
 {
   "ruby.version": "3.1.2",
-  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.colorTheme": "Dracula Soft",
   "editor.fontFamily": "'FiraCode Nerd Font Mono Light','JetBrainsMono Nerd Font Regular',Menlo, Monaco,'Courier New',monospace",
+  "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'FiraCode Nerd Font Mono Light','JetBrainsMono Nerd Font Regular',Menlo, Monaco, 'Courier New', monospace",
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
   "vim.easymotion": true,
@@ -10,9 +11,9 @@
   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
   "emmet.showSuggestionsAsSnippets": true,
+  "rust-analyzer.checkOnSave.command": "clippy",
   "emmet.includeLanguages": { "html.erb": "html", "erb": "html" },
   "rust-client.rustupPath": "~/.cargo/bin/rustup",
-  "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'FiraCode Nerd Font Mono Light','JetBrainsMono Nerd Font Regular',Menlo, Monaco, 'Courier New', monospace",
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "k"],
@@ -20,6 +21,18 @@
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "f", "s"],
+      "commands": ["workbench.action.findInFiles"]
+    },
+    {
+      "before": ["<leader>", "f", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["<leader>", "f", "e"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
     {
       "before": ["<leader>", "d"],
       "after": ["d", "d"]
@@ -84,7 +97,7 @@
   "editor.inlineSuggest.enabled": true,
   "github.copilot.enable": {
     "*": true,
-    "yaml": false,
+    "yaml": true,
     "plaintext": false,
     "markdown": true
   },
@@ -94,12 +107,11 @@
   },
   "window.titleBarStyle": "custom",
   "terminal.integrated.defaultProfile.osx": "zsh",
-  "apollographql.display.showRunInStudioButton": false,
   "editor.formatOnSave": true,
   "terminal.integrated.env.osx": {
     "VISUAL": "code -w"
   },
-  "editor.inlayHints.enabled": false,
+  "editor.inlayHints.enabled": "off",
   "byesig.fold": false,
   "byesig.enabled": true,
   "byesig.opacity": 0.5,
@@ -109,5 +121,9 @@
   "editor.rulers": [120],
   "terminal.integrated.scrollback": 10000,
   "githubPullRequests.pullBranch": "never",
-  "window.zoomLevel": 1
+  "rust-analyzer.checkOnSave.extraArgs": [
+    "--target-dir",
+    "/tmp/rust-analyzer-check"
+  ],
+  "redhat.telemetry.enabled": false
 }

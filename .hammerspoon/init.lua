@@ -194,7 +194,7 @@ hs.hotkey.bind(HYPEEEER, "b", function()
 end)
 
 -- Disable global cmd+h
-hs.hotkey.bind({ "cmd" }, "h", function() end)
+-- hs.hotkey.bind({ "cmd" }, "h", function() end)
 
 -- Stackline
 local stacklineConf = require("stackline.conf")
