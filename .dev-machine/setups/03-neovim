@@ -5,6 +5,11 @@ IFS=$'\n\t'
 
 source "$HOME/.dev-machine/utils.bash"
 
+if [ "${SPIN:-0}" = "1" ]; then
+  fancy_echo "⏭ Skipping in spin mode"
+  exit 1
+fi
+
 install_plugins() {
   fancy_echo "🔌 Installing nvim plugins"
 

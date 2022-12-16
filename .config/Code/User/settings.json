@@ -125,5 +125,7 @@
     "--target-dir",
     "/tmp/rust-analyzer-check"
   ],
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "scm.showActionButton": false,
+  "git.openDiffOnClick": false
 }

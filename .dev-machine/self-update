@@ -3,11 +3,15 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+if [ "${SPIN:-0}" = "1" ]; then
+  exit 0
+fi
+
 # Only run randomly 1/10 times
 if [ "$RANDOM" -gt 3277 ]; then
   exit 0
 else
-  echo "⏳ Checking for dev-machine updates..."
+  echo "⏳ Checking for dev-machine updates..." >&2
 fi
 
 
@@ -19,15 +23,15 @@ if [ "$(uname -s)" == "Darwin" ]; then
 fi
 
 if command -v yadm > /dev/null; then
-  quietly_run yadm pull || echo "WARNING: Could not update dev-machine (could not run yadm pull)"
+  quietly_run yadm pull || fancy_echo "WARNING: Could not update dev-machine (could not run yadm pull)"
 else
-  echo "ERROR: Could not update dev-machine (yadm not found)"
+  fancy_echo "ERROR: Could not update dev-machine (yadm not found)"
 fi
 
 version="$(cat $HOME/.dev-machine/version)"
 
 if ! grep -Fxq "$version" "$HOME/.dev-machine/installed-version"; then
-  echo "Updating dev-machine..."
+  fancy_echo "Updating dev-machine..."
 
   sleep 2
 
@@ -35,10 +39,10 @@ if ! grep -Fxq "$version" "$HOME/.dev-machine/installed-version"; then
 
   if yadm bootstrap; then
     echo "$version" > "$HOME/.dev-machine/installed-version"
-    echo "INFO: dev-machine update succeeded"
+    fancy_echo "INFO: dev-machine update succeeded"
   else
-    yadm upgrade || echo "ERROR: dev-machine update failed (could not upgrade yadm)"
-    yadm bootstrap || echo "ERROR: dev-machine update failed (could not bootstrap yadm)"
+    yadm upgrade || fancy_echo "ERROR: dev-machine update failed (could not upgrade yadm)"
+    yadm bootstrap || fancy_echo "ERROR: dev-machine update failed (could not bootstrap yadm)"
   fi
 fi
 

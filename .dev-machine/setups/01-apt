@@ -13,7 +13,7 @@ fi
 fancy_echo "ℹ️ Setting up your machine using apt-get..."
 
 install_packages() {
-  apt-get install -y neovim ripgrep zsh git git-lfs fd-find
+  sudo bash -c "apt-get install -y neovim ripgrep zsh git git-lfs fd-find >/dev/null 2>&1 & disown"
 }
 
 install_packages

@@ -4,13 +4,13 @@ set -euo pipefail
 IFS=$'\n\t'
 
 for script in $(find $HOME/.dev-machine/setups -type f | sort); do
-  echo "🏃‍♀️ Running setup script for $script"
+  echo "🏃‍♀️ Running setup script for $script" >&2
 
-  if bash "$script"; then 
-    echo "👍 Successfully ran $script"
+  if bash "$script"; then
+  echo "🏃‍♀️ Running setup script for $script" >&2
   else
-    echo "⚠️ Error occurred when attempting to run $script"
+    echo "⚠️ Error occurred when attempting to run $script" >&2
   fi
 done
 
-echo "✅ Done! Please open a new terminal window for changes to take effect."
+echo "✅ Done! Please open a new terminal window for changes to take effect." >&2

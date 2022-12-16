@@ -8,7 +8,7 @@ source "$HOME/.dev-machine/utils.bash"
 system_type=$(uname -s)
 
 if [ "$system_type" != "Darwin" ]; then
-  echo "⏭ System is not a mac, skipping"
+  fancy_echo "⏭ System is not a mac, skipping"
   exit 1
 fi
 
@@ -31,10 +31,7 @@ fi
 fancy_echo "Updating Homebrew formulae ..."
 brew update --force # https://github.com/Homebrew/brew/issues/1151
 brew bundle --file=- <<EOF
-tap "universal-ctags/universal-ctags"
-
 # Unix
-brew "universal-ctags", args: ["HEAD"]
 brew "git"
 brew "git-lfs"
 brew "pinentry-mac"
