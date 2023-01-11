@@ -1,0 +1,6 @@
+[keys.normal]
+C-s = ":w"
+g = { a = "code_action" } # Maps `ga` to show possible code actions
+
+[keys.insert]
+j = { k = "normal_mode" } # Maps `jk` to exit insert mode
