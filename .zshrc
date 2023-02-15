@@ -11,9 +11,7 @@ else
 fi
 
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -28,4 +26,5 @@ fi
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 [[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
 
-[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+chruby 3.1
+[[ -f "$HOME/.config/op/plugins.sh" ]] && source "$HOME/.config/op/plugins.sh"

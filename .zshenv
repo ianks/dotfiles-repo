@@ -39,7 +39,10 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # Add things to path
-export PATH="$PATH:/opt/homebrew/opt/mysql/bin"
+
+if [[ -d /opt/homebrew/opt/mysql/bin ]]; then
+  export PATH="$PATH:/opt/homebrew/opt/mysql/bin"
+fi
 
 # Export spin secrets which start with EXPORT__
 if [ -d /etc/spin/secrets ]; then
@@ -50,3 +53,5 @@ if [ -d /etc/spin/secrets ]; then
     export $with_prefix_removed="$(cat $file)"
   done
 fi
+
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
