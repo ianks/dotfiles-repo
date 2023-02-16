@@ -10,27 +10,14 @@ if [ "${SPIN:-0}" = "1" ]; then
   exit 1
 fi
 
-install_plugins() {
-  fancy_echo "🔌 Installing nvim plugins"
-
-  neovim_package_manager
-  neovim_packages
-}
-
-neovim_package_manager() {
-    local PACKER_DIRECTORY="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack/packer/start/packer.nvim"
-
-    if ! test -d  "$PACKER_DIRECTORY"; then
-        fancy_echo 'Installing a package manager for Neovim...'
-        quietly_run git clone "https://github.com/wbthomason/packer.nvim" "$PACKER_DIRECTORY"
-    fi
+install_astro() {
+  git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim || git -C ~/.config/nvim pull
 }
 
 neovim_packages() {
-    nvim -u NONE \
-        +'autocmd User PackerComplete quitall' \
-        +'lua require("ianks.plugins")' \
-        +'lua require("packer").sync()'
+  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' ||
+    (nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall' \
+    && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync')
 }
 
-install_plugins
+install_astro && neovim_packages

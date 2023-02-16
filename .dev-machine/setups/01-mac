@@ -47,10 +47,6 @@ brew "neovim"
 cask 'iterm2', args: { force: true }
 EOF
 
-fancy_echo "💻 Installing vscode settings..."
-ln -sf ~/.config/Code/User/settings.json  ~/Library/Application\ Support/Code/User/settings.json
-ln -sf ~/.config/Code/User/keybindings.json  ~/Library/Application\ Support/Code/User/keybindings.json
-
 fancy_echo "⌨️ Setting up iterm2 prefs..."
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/.config/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
